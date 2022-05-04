@@ -16,13 +16,13 @@ function get_CURL($url)
   return json_decode($result, true);
 }
 
-$result = get_CURL('https://www.googleapis.com/youtube/v3/channels?part=snippet,contentDetails,statistics&id=UCX0pQTGh7hAL2ckMPrDFgVQ&key=AIzaSyAc5BBe_agdrtGXCBmaFaOcxr7PxWUz6u8');
+$result = get_CURL('https://www.googleapis.com/youtube/v3/channels?part=snippet,contentDetails,statistics&id=UCsS-5rJMZXXa92slG13ww7A&key=AIzaSyAc5BBe_agdrtGXCBmaFaOcxr7PxWUz6u8');
 // var_dump($result);
 $youtubeProfile = $result['items'][0]['snippet']['thumbnails']['medium']['url'];
 $channelName = $result['items'][0]['snippet']['title'];
 $subcriber = $result['items'][0]['statistics']['subscriberCount'];
 
-$hasil = get_CURL('https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCX0pQTGh7hAL2ckMPrDFgVQ&maxResults=33&order=date&key=AIzaSyAc5BBe_agdrtGXCBmaFaOcxr7PxWUz6u8');
+$hasil = get_CURL('https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCsS-5rJMZXXa92slG13ww7A&maxResults=33&order=date&key=AIzaSyAc5BBe_agdrtGXCBmaFaOcxr7PxWUz6u8');
 // var_dump($hasil);
 $videoYoutube = $hasil['items'][0]['id']['videoId'];
 
