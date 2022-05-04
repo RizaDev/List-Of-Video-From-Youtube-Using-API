@@ -16,13 +16,21 @@ function get_CURL($url)
   return json_decode($result, true);
 }
 
-$result = get_CURL('https://www.googleapis.com/youtube/v3/channels?part=snippet,contentDetails,statistics&id=UCsS-5rJMZXXa92slG13ww7A&key=AIzaSyAc5BBe_agdrtGXCBmaFaOcxr7PxWUz6u8');
+$result = get_CURL('https://www.googleapis.com/youtube/v3/channels?part=snippet,contentDetails,statistics&id=UCsS-5rJMZXXa92slG13ww7A&key=AIzaSyBXik4Jcy8H087J9BNc-5c_X122cu0VCbg');
 // var_dump($result);
 $youtubeProfile = $result['items'][0]['snippet']['thumbnails']['medium']['url'];
 $channelName = $result['items'][0]['snippet']['title'];
 $subcriber = $result['items'][0]['statistics']['subscriberCount'];
 
-$hasil = get_CURL('https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCsS-5rJMZXXa92slG13ww7A&maxResults=33&order=date&key=AIzaSyAc5BBe_agdrtGXCBmaFaOcxr7PxWUz6u8');
+$hasil = get_CURL('https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCsS-5rJMZXXa92slG13ww7A&maxResults=50&order=date&key=AIzaSyBXik4Jcy8H087J9BNc-5c_X122cu0VCbg');
+$hasil1 = get_CURL('https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCsS-5rJMZXXa92slG13ww7A&maxResults=50&order=date&key=AIzaSyBXik4Jcy8H087J9BNc-5c_X122cu0VCbg&pageToken=CDIQAA');
+// $hasil2 = get_CURL('https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCsS-5rJMZXXa92slG13ww7A&maxResults=50&order=date&key=AIzaSyBXik4Jcy8H087J9BNc-5c_X122cu0VCbg&pageToken=CGQQAA');
+// $hasil3 = get_CURL('https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCsS-5rJMZXXa92slG13ww7A&maxResults=50&order=date&key=AIzaSyBXik4Jcy8H087J9BNc-5c_X122cu0VCbg&pageToken=CJYBEAA');
+// $hasil4 = get_CURL('https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCsS-5rJMZXXa92slG13ww7A&maxResults=50&order=date&key=AIzaSyBXik4Jcy8H087J9BNc-5c_X122cu0VCbg&pageToken=CMgBEAA');
+// $hasil5 = get_CURL('https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCsS-5rJMZXXa92slG13ww7A&maxResults=50&order=date&key=AIzaSyBXik4Jcy8H087J9BNc-5c_X122cu0VCbg&pageToken=CPoBEAA');
+// $hasil6 = get_CURL('https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCsS-5rJMZXXa92slG13ww7A&maxResults=50&order=date&key=AIzaSyBXik4Jcy8H087J9BNc-5c_X122cu0VCbg&pageToken=CKwCEAA');
+// $hasil7 = get_CURL('https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCsS-5rJMZXXa92slG13ww7A&maxResults=50&order=date&key=AIzaSyBXik4Jcy8H087J9BNc-5c_X122cu0VCbg&pageToken=CN4CEAA');
+// $hasil8 = get_CURL('https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCsS-5rJMZXXa92slG13ww7A&maxResults=41&order=date&key=AIzaSyBXik4Jcy8H087J9BNc-5c_X122cu0VCbg&pageToken=CJADEAA');
 // var_dump($hasil);
 $videoYoutube = $hasil['items'][0]['id']['videoId'];
 
@@ -87,7 +95,7 @@ $videoYoutube = $hasil['items'][0]['id']['videoId'];
   </div>
 
   <!-- About -->
-  <section class="about " style="height: 400px;" id="about">
+  <section class="about" style="height: 400px;" id="about">
     <div class="container my-5 ">
       <div class="row mt-5 pt-5 ">
         <div class="col text-center ">
@@ -106,7 +114,7 @@ $videoYoutube = $hasil['items'][0]['id']['videoId'];
   </section>
 
   <!-- List Video Of Youtube -->
-  <section class="social bg-light " style="height: 3000px;" id="social">
+  <section class="social bg-light " style="height: 10300px;" id="social">
     <div class="container my-5   ">
       <div class="row my-5 pt-5   ">
         <div class="col text-center ">
@@ -128,23 +136,43 @@ $videoYoutube = $hasil['items'][0]['id']['videoId'];
           </div>
 
           <div class="row mt-4 mb-3">
-          <!-- $videoYoutube = $hasil['items'][0]['id']['videoId']; -->
-            <?php for($x = 0;$x < 33; $x++) {?>
-              <div class="col-md-4 mb-3">
-                <div class="embed-responsive embed-responsive-16by9">
-                  <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/<?= $hasil['items'][$x]['id']['videoId']; ?>?rel=0" allowfullscreen></iframe>
-                </div>
-              </div>
-            <?php } ?>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">NO</th>
+                  <th scope="col">Title</th>
+                  <th scope="col">Description</th>
+                  <th scope="col">Link Video</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php for($x = 0;$x < 50; $x++) {?>
+                    <tr>
+                      <th scope="row"><?= $x + 1; ?></th>
+                      <td><?= $hasil['items'][$x]['snippet']['title']; ?></td>
+                      <td><?= $hasil['items'][$x]['snippet']['description']; ?></td>
+                      <td>https://www.youtube.com/watch?v=<?= $hasil['items'][$x]['id']['videoId']; ?></td>
+                    </tr>
+                  <?php } ?>
+                  <?php for($x = 0;$x < 50; $x++) {?>
+                    <tr>
+                      <th scope="row"><?= $x + 1 + 50; ?></th>
+                      <td><?= $hasil1['items'][$x]['snippet']['title']; ?></td>
+                      <td><?= $hasil1['items'][$x]['snippet']['description']; ?></td>
+                      <td>https://www.youtube.com/watch?v=<?= $hasil1['items'][$x]['id']['videoId']; ?></td>
+                    </tr>
+                  <?php } ?>
+              </tbody>
+            </table>
           </div>
+
         </div>
 
       </div>
     </div>
   </section>
-
-  <!-- Portfolio -->
-  <section class="portfolio " style="height: 1000px;" id="portfolio">
+ <!-- Portfolio -->
+ <section class="portfolio " style="height: 1000px;" id="portfolio">
     <div class="container mt-5 mb-5">
       <div class="row pt-5 mt-5">
         <div class="col text-center">
